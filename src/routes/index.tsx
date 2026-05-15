@@ -3,6 +3,7 @@ import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { About } from "@/components/site/About";
 import { Services } from "@/components/site/Services";
+import officeMeeting from "@/assets/office-meeting.jpg";
 import { Testimonials } from "@/components/site/Testimonials";
 import { Social } from "@/components/site/Social";
 import { FAQ } from "@/components/site/FAQ";
@@ -30,6 +31,12 @@ function Index() {
       <main>
         <Hero />
         <About />
+        <img
+          src={officeMeeting}
+          alt="Sala de reuniões do escritório"
+          loading="lazy"
+          className="w-full h-[280px] md:h-[420px] lg:h-[520px] object-cover"
+        />
         <Services />
         <Testimonials />
         <Social />
