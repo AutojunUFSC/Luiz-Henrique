@@ -33,7 +33,7 @@ export function Footer() {
             <a
               key={l.href}
               href={l.href}
-               className="text-[13px] font-medium tracking-[0.08em] text-white hover:text-[#d4b87a] transition-colors"
+               className="text-[14px] font-medium tracking-[0.08em] text-white hover:text-[#d4b87a] transition-colors"
               style={{ fontFamily: "Inter, sans-serif" }}
             >
               {l.label}

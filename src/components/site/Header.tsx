@@ -35,7 +35,7 @@ export function Header() {
             <a
               key={l.href}
               href={l.href}
-              className="text-[13px] font-medium tracking-[0.08em] text-[#1a1a1a] hover:text-[#b8a572] transition-colors"
+              className="text-[14px] font-medium tracking-[0.08em] text-[#1a1a1a] hover:text-[#b8a572] transition-colors"
               style={{ fontFamily: "Inter, sans-serif" }}
             >
               {l.label}
@@ -45,10 +45,10 @@ export function Header() {
 
         <a
           href="#contato"
-          className="inline-flex items-center justify-center hover:opacity-90 transition"
+          className="inline-flex items-center mr-15 justify-center hover:opacity-90 transition"
           style={{
-            width: "215.13px",
-            height: "44.909px",
+            width: "201.13px",
+            height: "42.909px",
             borderRadius: "7.243px",
             background: "#001E2C",
             color: "#FFF",
@@ -57,7 +57,6 @@ export function Header() {
             fontStyle: "normal",
             fontWeight: 500,
             lineHeight: "130.969%",
-            letterSpacing: "0.02em",
           }}
         >
           Entre em contato
