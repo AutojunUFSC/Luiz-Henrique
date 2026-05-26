@@ -43,7 +43,20 @@ export function Footer() {
 
         <a
           href="#contato"
-          className="inline-flex items-center px-6 py-3 mr-15 rounded-md bg-[#f3ead4] text-[#0f1726] text-[13px] font-semibold tracking-wide hover:bg-[#e9dcb8] transition"
+          className="inline-flex items-center justify-center mr-15 hover:opacity-90 transition"
+          style={{
+            width: "215.13px",
+            height: "44.909px",
+            borderRadius: "7.243px",
+            background:"#EDE1D0",
+            color: "#1D1B1B",
+            fontFamily: "'Pathway Extreme', sans-serif",
+            fontSize: "20.282px",
+            fontStyle: "normal",
+            fontWeight: 500,
+            lineHeight: "130.969%",
+            letterSpacing: "0.02em",
+          }}
         >
           Entre em contato
         </a>
