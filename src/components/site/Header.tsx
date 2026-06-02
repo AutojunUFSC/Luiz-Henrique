@@ -21,10 +21,9 @@ export function Header() {
         backgroundImage: `url(${headerBg})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        boxShadow: "0px 8px 48.9px 0px rgba(0,0,0,0.23), 0px 5px 7.5px 0px rgba(0,0,0,0.25)" }}
+        backgroundRepeat: "no-repeat"}}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between" style={{ height: "116px" }}
+      <div className="container mx-auto px-6 flex items-center justify-between" style={{ height: "90px"}}
 >
         <a href="#inicio" className="flex items-center ml-10" aria-label="Luiz Ely Advocacia">
           <img src={logo} alt="Luiz Ely Advocacia" className="h-14 w-auto" />
@@ -45,7 +44,7 @@ export function Header() {
 
         <a
           href="#contato"
-          className="inline-flex items-center mr-15 justify-center hover:opacity-90 transition"
+          className="hidden lg:inline-flex items-center mr-12 justify-center hover:opacity-90 transition"
           style={{
             width: "201.13px",
             height: "42.909px",
@@ -72,7 +71,13 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden absolute left-0 right-0 top-[116px] header-cream border-t border-[#e6dcc6] z-50">
+        <div className="lg:hidden absolute left-0 right-0 top-[72px] border-t border-[#e6dcc6] z-50 min-h-screen"
+        style={{
+          backgroundImage: `url(${headerBg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}>
           <div className="px-6 py-4 flex flex-col gap-4">
             {links.map((l) => (
               <a

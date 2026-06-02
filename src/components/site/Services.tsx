@@ -6,11 +6,18 @@ import aposentadoriaImg from "@/assets/service-aposentadoria.png";
 import acidenteImg from "@/assets/service-acidente.png";
 import revisaoImg from "@/assets/service-revisao.png";
 import bpcImg from "@/assets/service-bpc.png";
-import iconAposentadoria from "@/assets/service-aposentadoria.png";
+import iconAposentadoria from "@/assets/service-icon-aposentadoria.png";
+import iconPensao from "@/assets/service-icon-pensao.png";
+import iconAcidente from "@/assets/service-icon-acidente.png";
+import iconIncapacidade from "@/assets/service-icon-incapacidade.png";
+import iconBpc from "@/assets/service-icon-bpc.png";
+import iconRevisao from "@/assets/service-icon-revisao.png";
+import unionBg from "@/assets/Union.png";
 
 type Bullet = { lead: string; text: string };
 type Service = {
   img: string;
+  icon: string; 
   alt: string;
   title: string;
   subtitle: string;
@@ -28,6 +35,7 @@ const loremBullets: Bullet[] = [
 const services: Service[] = [
   {
     img: incapacidadeImg,
+    icon: iconIncapacidade,
     alt: "Incapacidade",
     title: "INCAPACIDADE",
     subtitle: "(Auxílio & Benefícios)",
@@ -37,6 +45,7 @@ const services: Service[] = [
   },
   {
     img: pensaoImg,
+    icon: iconPensao,
     alt: "Pensão",
     title: "PENSÃO",
     subtitle: "(Por Morte)",
@@ -46,6 +55,7 @@ const services: Service[] = [
   },
   {
     img: aposentadoriaImg,
+    icon: iconAposentadoria,
     alt: "Aposentadoria",
     title: "APOSENTADORIA",
     subtitle: "(Análise & Concessão)",
@@ -60,6 +70,7 @@ const services: Service[] = [
   },
   {
     img: acidenteImg,
+    icon: iconAcidente,
     alt: "Acidente",
     title: "ACIDENTE",
     subtitle: "(Trabalho & Trânsito)",
@@ -69,6 +80,7 @@ const services: Service[] = [
   },
   {
     img: revisaoImg,
+    icon: iconRevisao,
     alt: "Revisão",
     title: "REVISÃO",
     subtitle: "(De Benefícios)",
@@ -78,6 +90,7 @@ const services: Service[] = [
   },
   {
     img: bpcImg,
+    icon: iconBpc,
     alt: "BPC/LOAS",
     title: "BPC / LOAS",
     subtitle: "(Benefício Assistencial)",
@@ -92,9 +105,28 @@ export function Services() {
   const active = openIndex !== null ? services[openIndex] : null;
 
   return (
-    <section id="servicos" className="py-24 bg-background">
+    <section
+      id="servicos"
+      className="py-24"
+      style={{
+        background: "#A68D68",
+        backgroundImage: `url(${unionBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+  }}
+>
       <div className="container mx-auto px-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-gold mb-12">Serviços</h2>
+        <h2 className="mb-12" style={{
+          fontFamily:"'Pathway Extreme', sans-serif",
+          fontWeight: 800,
+          fontSize: "64px",
+          lineHeight: "100%",
+          letterSpacing: "0%",
+          color: "rgba(0,29,51,1)",
+        }}
+      >
+          Serviços</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((s, i) => (
             <button
@@ -117,36 +149,42 @@ export function Services() {
 
       <Dialog open={openIndex !== null} onOpenChange={(o) => !o && setOpenIndex(null)}>
         <DialogContent className="w-[92vw] max-w-[420px] max-h-[85vh] overflow-y-auto bg-[#111] border-none rounded-[28px] p-8 text-white shadow-2xl">
-          {active && (
-            <div className="flex flex-col items-center text-center">
-              <img
-                src={active.img}
-                alt={active.alt}
-                className="w-16 h-16 object-contain mb-3"
-              />
-              <DialogTitle className="text-2xl font-bold text-gold tracking-wide">
-                {active.title}
-              </DialogTitle>
-              <p className="text-sm text-white/80 italic mt-1 mb-4">
-                {active.subtitle}
-              </p>
-              <p className="text-sm leading-relaxed text-white/85 mb-5">
-                {active.intro}
-              </p>
-              <ul className="space-y-3 text-left w-full">
-                {active.bullets.map((b, idx) => (
-                  <li key={idx} className="text-sm leading-relaxed text-white/85 flex">
-                    <span className="text-gold mr-2">•</span>
-                    <span>
-                      <span className="font-bold text-gold">{b.lead}</span>{" "}
-                      {b.text}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </DialogContent>
+  {active && (
+    <div className="flex flex-col">
+      <div className="flex items-center gap-4 mb-1">
+        <img
+          src={active.icon}
+          alt={active.alt}
+          className="w-12 h-12 object-contain shrink-0"
+        />
+        <div className="text-left">
+          <DialogTitle className="text-2xl font-bold text-gold tracking-wide">
+            {active.title}
+          </DialogTitle>
+          <p className="text-sm text-white/80 italic">
+            {active.subtitle}
+          </p>
+        </div>
+      </div>
+
+      {/* Conteúdo */}
+      <p className="text-sm leading-relaxed text-white/85 mb-5 mt-4">
+        {active.intro}
+      </p>
+      <ul className="space-y-3 text-left w-full">
+        {active.bullets.map((b, idx) => (
+          <li key={idx} className="text-sm leading-relaxed text-white/85 flex">
+            <span className="text-gold mr-2">•</span>
+            <span>
+              <span className="font-bold text-gold">{b.lead}</span>{" "}
+              {b.text}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )}
+</DialogContent>
       </Dialog>
     </section>
   );
