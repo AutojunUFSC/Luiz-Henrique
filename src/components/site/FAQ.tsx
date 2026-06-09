@@ -1,4 +1,6 @@
 import { useState } from "react";
+import unionBg from "@/assets/Background_faq_contato.png";
+
 
 const faqs = [
   { q: "Como sei se tenho direito à aposentadoria?", a: "Realizamos uma análise gratuita do seu CNIS e tempo de contribuição para identificar a melhor estratégia." },
