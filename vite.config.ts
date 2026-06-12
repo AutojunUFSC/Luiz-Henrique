@@ -15,6 +15,15 @@ export default defineConfig({
     router: {
       basepath: githubPagesBase,
     },
+    prerender: {
+      enabled: true,
+    },
+    spa: {
+      enabled: true,
+      prerender: {
+        outputPath: "/index",
+      },
+    },
   },
   vite: {
     base: githubPagesBase,
