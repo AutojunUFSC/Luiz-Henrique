@@ -1,5 +1,6 @@
 import { useState } from "react";
 import unionBg from "@/assets/Background_faq_contato.png";
+import logoNegativa from "@/assets/Logo_subtract.png";
 
 
 const faqs = [
@@ -15,8 +16,24 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 pattern-deco opacity-20" />
+    <section
+      id="faq"
+      className="py-24 relative overflow-hidden"
+      style={{ backgroundColor: "rgba(166, 141, 104, 1)" }}
+>
+  <div className="absolute inset-0 pattern-deco opacity-20" />
+  
+  {/* Imagem decorativa no canto direito */}
+  <div
+    className="absolute right-0 top-0 bottom-0 w-[180px] pointer-events-none"
+    style={{
+      backgroundImage: `url(${unionBg})`,
+      backgroundSize: "cover",
+      backgroundPosition: "left center",
+      backgroundRepeat: "no-repeat",
+      opacity: 0.8,
+    }}
+  />
       <div className="container mx-auto px-6 relative">
         <h2 className="text-4xl md:text-5xl font-bold text-gold mb-12">Perguntas Frequentes</h2>
         <div className="grid md:grid-cols-2 gap-4 max-w-5xl">
