@@ -1,6 +1,6 @@
 import { useState } from "react";
 import unionBg from "@/assets/Background_faq_contato.png";
-import logoNegativa from "@/assets/Logo_subtract.png";
+import logoFAQ from "@/assets/Logo_luiz_henrique_FAQ.png";
 
 
 const faqs = [
@@ -19,7 +19,7 @@ export function FAQ() {
     <section
       id="faq"
       className="py-24 relative overflow-hidden"
-      style={{ backgroundColor: "rgba(166, 141, 104, 1)" }}
+      style={{ backgroundColor: "rgba(166, 141, 104, 1)"}}
 >
   <div className="absolute inset-0 pattern-deco opacity-20" />
   
@@ -31,11 +31,30 @@ export function FAQ() {
       backgroundSize: "cover",
       backgroundPosition: "left center",
       backgroundRepeat: "no-repeat",
-      opacity: 0.8,
+      opacity: 1,
+    }}
+  />
+  <div
+    className="absolute -left-90 -top-30 bottom-0 w-[1058px] h-[1042px] pointer-events-none"
+    style={{
+      backgroundImage: `url(${logoFAQ})`,
+      backgroundSize: "contain",
+      backgroundPosition: "left center",
+      backgroundRepeat: "no-repeat",
+      opacity: 0.1,
     }}
   />
       <div className="container mx-auto px-6 relative">
-        <h2 className="text-4xl md:text-5xl font-bold text-gold mb-12">Perguntas Frequentes</h2>
+        <h2 className="text-4xl md:text-5xl mb-12"
+        style={{
+          color: "#FFF",
+            fontFamily: "'Pathway Extreme', sans-serif",
+            fontSize: "58px",
+            fontStyle: "normal",
+            fontWeight: 800,
+            lineHeight: "100%",
+        }}
+        >Perguntas Frequentes</h2>
         <div className="grid md:grid-cols-2 gap-4 max-w-5xl">
           {faqs.map((f, i) => {
             const isOpen = open === i;
