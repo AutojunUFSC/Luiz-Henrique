@@ -4,12 +4,12 @@ import logoFAQ from "@/assets/Logo_luiz_henrique_FAQ.png";
 
 
 const faqs = [
-  { q: "Como sei se tenho direito à aposentadoria?", a: "Realizamos uma análise gratuita do seu CNIS e tempo de contribuição para identificar a melhor estratégia." },
-  { q: "Posso solicitar revisão do meu benefício?", a: "Sim. Muitos benefícios são concedidos com valores menores que o devido. Avaliamos sem compromisso." },
-  { q: "Quanto tempo leva o processo no INSS?", a: "Depende do tipo de benefício, mas trabalhamos para reduzir prazos com estratégia jurídica adequada." },
-  { q: "Qual o valor da minha aposentadoria?", a: "Calculamos o valor correto considerando todas as suas contribuições e regras de transição." },
-  { q: "Atendem em todo o Brasil?", a: "Sim. Atendemos presencial e 100% online, em todos os estados." },
-  { q: "Cobram pela consulta inicial?", a: "A primeira análise do seu caso é totalmente gratuita." },
+  { q: "Como sei qual é a regra de aposentadoria certa para mim?", a: "Realizamos uma análise gratuita do seu CNIS e tempo de contribuição para identificar a melhor estratégia." },
+  { q: "Posso pagar INSS atrasado e me aposentar mais cedo?", a: "Sim. Muitos benefícios são concedidos com valores menores que o devido. Avaliamos sem compromisso." },
+  { q: "O INSS negou meu auxílio-doença. E agora, o que eu faço?", a: "Depende do tipo de benefício, mas trabalhamos para reduzir prazos com estratégia jurídica adequada." },
+  { q: "Qual o valor da minha aposentadoria?", a: "O valor depende de uma média das suas contribuições ao longo da vida e da regra na qual você se encaixa. Muitas vezes, o INSS comete erros de cálculo ou deixa de contar períodos de trabalho. Analisamos todo o seu histórico para garantir que nenhum centavo do seu direito fique para trás." },
+  { q: "Nunca paguei o INSS na vida. Tenho direito a algum benefício?", a: "Sim. Atendemos presencial e 100% online, em todos os estados." },
+  { q: "O escritório atende pessoas de outras cidades e estados?", a: "A primeira análise do seu caso é totalmente gratuita." },
 ];
 
 export function FAQ() {
@@ -25,7 +25,7 @@ export function FAQ() {
   
   {/* Imagem decorativa no canto direito */}
   <div
-    className="absolute right-0 top-0 bottom-0 w-[180px] pointer-events-none"
+    className="absolute right-0 top-0 h-[900px] w-[180px] pointer-events-none"
     style={{
       backgroundImage: `url(${unionBg})`,
       backgroundSize: "cover",
@@ -55,7 +55,7 @@ export function FAQ() {
             lineHeight: "100%",
         }}
         >Perguntas Frequentes</h2>
-        <div className="grid md:grid-cols-2 gap-4 max-w-5xl">
+        <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
@@ -64,21 +64,26 @@ export function FAQ() {
                 type="button"
                 onClick={() => setOpen(isOpen ? null : i)}
                 aria-expanded={isOpen}
-                className="bg-card border border-gold/20 rounded-xl px-6 py-5 text-center transition-colors hover:border-gold/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-              >
+                className="self-start bg-card border ml-4 border-gold/20 rounded-xl px-2 py-2 text-center transition-colors hover:border-gold/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              style={{
+                backgroundColor: "rgba(24, 24, 24, 1)",
+              }}>
                 <span
-                  className="block text-gold"
+                  className="block transition-all"
                   style={{
                     fontFamily: "'Pathway Extreme', sans-serif",
                     fontWeight: 700,
-                    fontSize: "26px",
+                    fontSize: isOpen ? "30px": "22px",
                     lineHeight: "131%",
                   }}
                 >
                   {f.q}
                 </span>
                 {isOpen && (
-                  <p className="mt-4 text-muted-foreground text-base leading-relaxed">
+                  <p className="mt-4 ml-3 mr-3 text-muted-foreground text-justify text-base leading-relaxed"
+                  style={{
+                    color:"rgba(255, 255, 255, 1)",
+                  }}>
                     {f.a}
                   </p>
                 )}
