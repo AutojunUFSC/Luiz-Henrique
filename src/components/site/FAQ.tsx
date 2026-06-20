@@ -18,13 +18,13 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="py-24 relative overflow-hidden"
-      style={{ backgroundColor: "rgba(166, 141, 104, 1)"}}
+      className="py-24 overflow-hidden"
+      style={{/*backgroundColor: "rgba(166, 141, 104, 1)",*/}}
 >
-  <div className="absolute inset-0 pattern-deco opacity-20" />
+  <div className="absolute inset-0 pattern-deco opacity-0" />
   
   {/* Imagem decorativa no canto direito */}
-  <div
+  {/* <div
     className="absolute right-0 top-0 h-[900px] w-[180px] pointer-events-none"
     style={{
       backgroundImage: `url(${unionBg})`,
@@ -33,7 +33,7 @@ export function FAQ() {
       backgroundRepeat: "no-repeat",
       opacity: 1,
     }}
-  />
+  /> */}
   <div
     className="absolute -left-90 -top-30 bottom-0 w-[1058px] h-[1042px] pointer-events-none"
     style={{
