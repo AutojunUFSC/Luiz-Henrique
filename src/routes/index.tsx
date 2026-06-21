@@ -35,7 +35,7 @@ function Index() {
           src={officeMeeting}
           alt="Sala de reuniões do escritório"
           loading="lazy"
-          className="w-full h-[280px] md:h-[420px] lg:h-[520px] object-cover"
+          className="w-full h-[130px] md:h-[250px] lg:h-[330px] object-cover filter brightness-60"
         />
         <Services />
         <Testimonials />
