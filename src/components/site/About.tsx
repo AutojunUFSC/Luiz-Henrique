@@ -15,6 +15,14 @@ export function About() {
         }}
       />
       <div className="container mx-auto px-6 relative">
+        
+        <h2 
+          className="text-5xl md:text-6xl font-bold text-white mb-12"
+          style={{ fontFamily: "'Pathway Extreme', sans-serif" }}
+        >
+          Quem somos
+        </h2>
+
         <div className="grid lg:grid-cols-2 gap-12 items-stretch">
           <div 
             className="rounded-2xl overflow-hidden shadow-[-20px_20px_50px_-5px_rgba(0,0,0,0.80)]"

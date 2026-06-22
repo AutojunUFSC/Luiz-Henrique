@@ -40,28 +40,68 @@ const items = [
 
 export function Testimonials() {
   return (
-    <section id="depoimentos" className="py-24 bg-background">
-      <div className="container mx-auto px-6 mb-10">
-        <h2 className="text-4xl md:text-5xl font-bold text-gold">Depoimentos</h2>
+    <section id="depoimentos" className="pt-24 pb-0 relative z-20 overflow-visible">
+      
+      {/* Metade superior da seção em Bege */}
+      <div className="absolute inset-x-0 top-0 bottom-[180px] bg-[#A68D68] -z-10" />
+      
+      {/* Rodapé da seção casado perfeitamente com a cor da seção Social (#181818) */}
+      <div className="absolute inset-x-0 bottom-0 h-[180px] bg-[#181818] -z-10" />
+
+      <div className="container mx-auto px-6 mb-12 relative z-10">
+        <h2 
+          className="text-5xl md:text-6xl font-bold text-[#001D33]"
+          style={{ fontFamily: "'Pathway Extreme', sans-serif" }}
+        >
+          Depoimentos
+        </h2>
       </div>
 
-      <div className="relative">
+      <div className="relative z-10">
+        {/* AJUSTE AQUI: Mudado px-6 para px-12 nas telas menores, e recalculado o preenchimento para telas grandes (md) */}
         <div
-          className="flex gap-6 overflow-x-auto pb-8 px-6 md:pl-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))] snap-x snap-mandatory cursor-grab active:cursor-grabbing scrollbar-hide"
+          className="flex gap-6 overflow-x-auto pt-16 pb-16 px-12 md:pl-[max(3rem,calc((100vw-1280px)/2+3rem))] md:pr-[max(3rem,calc((100vw-1280px)/2+3rem))] snap-x snap-mandatory cursor-grab active:cursor-grabbing scrollbar-hide"
           style={{ scrollbarWidth: "none" }}
         >
           {items.map((t) => (
             <article
               key={t.name}
-              className="snap-start shrink-0 w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[calc((100%-1.5rem*3)/3.5)] min-w-[260px] max-w-[360px] aspect-[5/6] rounded-3xl bg-[#0b1a30] text-white p-7 shadow-[0_20px_50px_-20px_rgba(0,0,0,0.6)] relative overflow-hidden"
+              className="snap-start shrink-0 w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[calc((100%-1.5rem*3)/3.5)] min-w-[260px] max-w-[360px] aspect-[5/6] relative overflow-visible"
             >
-              <Gavel className="absolute top-5 right-5 w-10 h-10 text-white/70 -rotate-12" strokeWidth={1.5} />
-              <div className="text-sm text-white/90 mb-1">{t.name}</div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-5 leading-tight">{t.category}</h3>
-              <p className="text-sm leading-relaxed text-white/85">{t.text}</p>
+              {/* Martelo flutuante com efeito 3D */}
+              <Gavel 
+                className="absolute -top-10 -right-4 w-20 h-20 text-[#e2e8f0] drop-shadow-[-12px_12px_20px_rgba(0,0,0,0.6)] -rotate-12 z-30 transition-transform duration-300 hover:scale-110" 
+                strokeWidth={1.2} 
+              />
+              
+              <div className="rounded-3xl bg-[#0b1a30] p-7 h-full w-full shadow-[-15px_15px_40px_-10px_rgba(0,0,0,0.4)] relative z-20 flex flex-col justify-between">
+                <div>
+                  <div 
+                    className="text-sm text-white/80 mb-2"
+                    style={{ fontFamily: "'Pathway Extreme', sans-serif" }}
+                  >
+                    {t.name}
+                  </div>
+                  
+                  <h3 
+                    className="text-[26px] font-bold mb-5 leading-tight text-white"
+                    style={{ fontFamily: "'Pathway Extreme', sans-serif" }}
+                  >
+                    {t.category}
+                  </h3>
+                  
+                  <p 
+                    className="text-[18px] leading-relaxed text-white/90"
+                    style={{ fontFamily: "'Playfair Display', sans-serif" }}
+                  >
+                    {t.text}
+                  </p>
+                </div>
+              </div>
             </article>
           ))}
-          <div className="shrink-0 w-6" aria-hidden />
+          {/* AJUSTE AQUI: Aumentado de w-6 para w-12 para dar mais espaço de respiro no final da rolagem */}
+          <div className="shrink-0 w-12" aria-hidden />
         </div>
       </div>
     </section>

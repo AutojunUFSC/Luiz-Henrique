@@ -1,7 +1,6 @@
 import { useState } from "react";
 import unionBg from "@/assets/Background_faq_contato.png";
 
-
 const faqs = [
   { q: "Como sei se tenho direito à aposentadoria?", a: "Realizamos uma análise gratuita do seu CNIS e tempo de contribuição para identificar a melhor estratégia." },
   { q: "Posso solicitar revisão do meu benefício?", a: "Sim. Muitos benefícios são concedidos com valores menores que o devido. Avaliamos sem compromisso." },
@@ -15,11 +14,24 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section id="faq" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 pattern-deco opacity-20" />
-      <div className="container mx-auto px-6 relative">
-        <h2 className="text-4xl md:text-5xl font-bold text-gold mb-12">Perguntas Frequentes</h2>
-        <div className="grid md:grid-cols-2 gap-4 max-w-5xl">
+    <section id="faq" className="relative -mt-24 pt-36 pb-24 bg-[#A68D68] z-20 overflow-hidden">
+      
+      <div
+        className="absolute top-0 left-0 w-full h-[600px] opacity-40 pointer-events-none bg-no-repeat bg-top bg-cover"
+        style={{
+          backgroundImage: `url(${unionBg})`,
+        }}
+      />
+
+      <div className="container mx-auto px-6 relative z-10">
+        <h2 
+          className="text-5xl md:text-6xl font-bold text-[#ffffff] mb-12"
+          style={{ fontFamily: "'Pathway Extreme', sans-serif" }}
+        >
+          Perguntas Frequentes
+        </h2>
+        
+        <div className="grid md:grid-cols-2 gap-6 max-w-6xl">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
@@ -28,10 +40,10 @@ export function FAQ() {
                 type="button"
                 onClick={() => setOpen(isOpen ? null : i)}
                 aria-expanded={isOpen}
-                className="bg-card border border-gold/20 rounded-xl px-6 py-5 text-center transition-colors hover:border-gold/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                className="bg-[#ffffff]/10 backdrop-blur-sm border border-[#ffffff]/20 rounded-2xl px-8 py-6 text-left transition-all hover:bg-[#ffffff]/20 focus:outline-none"
               >
                 <span
-                  className="block text-gold"
+                  className="block text-[#ffffff]"
                   style={{
                     fontFamily: "'Pathway Extreme', sans-serif",
                     fontWeight: 700,
@@ -41,8 +53,12 @@ export function FAQ() {
                 >
                   {f.q}
                 </span>
+                
                 {isOpen && (
-                  <p className="mt-4 text-muted-foreground text-base leading-relaxed">
+                  <p 
+                    className="mt-5 text-[#ffffff] text-[20px] leading-relaxed"
+                    style={{ fontFamily: "'Playfair Display', sans-serif" }}
+                  >
                     {f.a}
                   </p>
                 )}
