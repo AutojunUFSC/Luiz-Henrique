@@ -2,7 +2,6 @@ import { useState } from "react";
 import unionBg from "@/assets/Background_faq_contato.png";
 import logoFAQ from "@/assets/Logo_luiz_henrique_FAQ.png";
 
-
 const faqs = [
   { q: "Como sei qual é a regra de aposentadoria certa para mim?", a: "Realizamos uma análise gratuita do seu CNIS e tempo de contribuição para identificar a melhor estratégia." },
   { q: "Posso pagar INSS atrasado e me aposentar mais cedo?", a: "Sim. Muitos benefícios são concedidos com valores menores que o devido. Avaliamos sem compromisso." },
@@ -79,6 +78,7 @@ export function FAQ() {
                 >
                   {f.q}
                 </span>
+                
                 {isOpen && (
                   <p className="mt-4 ml-3 mr-3 text-muted-foreground text-justify text-base leading-relaxed"
                   style={{
