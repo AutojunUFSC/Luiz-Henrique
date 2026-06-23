@@ -11,6 +11,7 @@ import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 import { Whatsapp } from "@/components/site/Whatsapp";
 import { Toaster } from "@/components/ui/sonner";
+import unionBg from "@/assets/Background_faq_contato.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,8 +41,24 @@ function Index() {
         <Services />
         <Testimonials />
         <Social />
-        <FAQ />
-        <Contact />
+
+        {/* Wrapper com imagem decorativa compartilhada entre FAQ e Contato */}
+        <div className="relative overflow-hidden" style={{ backgroundColor: "rgba(166, 141, 104, 1)" }}>
+          <div
+            className="absolute right-0 top-0 h-full w-[180px] pointer-events-none z-0"
+            style={{
+              backgroundImage: `url(${unionBg})`,
+              backgroundSize: "cover",
+              backgroundPosition: "left center",
+              backgroundRepeat: "no-repeat",
+              opacity: 1,
+            }}
+          />
+          <div className="relative z-10">
+            <FAQ />
+            <Contact />
+          </div>
+        </div>
       </main>
       <Footer />
       <Whatsapp />
