@@ -2,7 +2,6 @@ import { useState } from "react";
 import unionBg from "@/assets/Background_faq_contato.png";
 import logoFAQ from "@/assets/Logo_luiz_henrique_FAQ.png";
 
-
 const faqs = [
   { q: "Como sei qual é a regra de aposentadoria certa para mim?", a: "Com as recentes mudanças na lei, existem diversas regras de transição. A regra certa depende do seu tempo de contribuição, idade e tipo de trabalho. Por isso, não usamos fórmulas prontas. Realizamos um estudo personalizado da sua vida de trabalho (Planejamento Previdenciário) para descobrir exatamente qual regra traz o benefício mais vantajoso e rápido para você." },
   { q: "Posso pagar INSS atrasado e me aposentar mais cedo?", a: "Em alguns casos, sim. Profissionais autônomos ou empresários podem recolher períodos em atraso. No entanto, é preciso muito cuidado: pagar atrasado sem uma análise prévia pode fazer você perder dinheiro, pois o INSS pode não aceitar o pagamento para fins de contagem de tempo. Sempre consulte um especialista antes de gerar qualquer guia de atrasados." },
@@ -78,6 +77,7 @@ export function FAQ() {
                 >
                   {f.q}
                 </span>
+                
                 {isOpen && (
                   <p className="mt-4 ml-3 mr-3 text-muted-foreground text-justify text-base leading-relaxed"
                   style={{
