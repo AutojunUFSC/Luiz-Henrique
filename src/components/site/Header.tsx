@@ -71,7 +71,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden absolute left-0 right-0 top-[72px] border-t border-[#e6dcc6] z-50 min-h-screen"
+        <div className="lg:hidden absolute left-0 right-0 top-[76px] h-[370px] border-t border-[#e6dcc6] z-50"
         style={{
           backgroundImage: `url(${headerBg})`,
           backgroundSize: "cover",
