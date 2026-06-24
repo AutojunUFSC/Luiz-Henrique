@@ -144,18 +144,18 @@ export function Services() {
       </div>
 
       <Dialog open={openIndex !== null} onOpenChange={(o) => !o && setOpenIndex(null)}>
-        <DialogContent className="w-[92vw] max-w-[420px] max-h-[85vh] overflow-y-auto bg-[#111] border-none rounded-[28px] p-8 text-white shadow-2xl">
+        <DialogContent className="w-[92vw] max-w-[420px] md:max-w-[600px] lg:max-w-[700px] max-h-[85vh] overflow-y-auto bg-[#111] border-none rounded-[28px] p-8 text-white shadow-2xl">
   {active && (
     <div className="flex flex-col">
       <div className="flex items-center gap-4 mb-1">
         <img
           src={active.icon}
           alt={active.alt}
-          className="w-12 h-12 object-contain shrink-0"
+          className="w-12 h-12 md:w-16 md:h-16 object-contain shrink-0"
         />
         <div className="text-left">
           <DialogTitle
-            className="text-2xl font-bold tracking-wide"
+            className="text-2xl md:text-3xl font-bold tracking-wide"
             style={{
               color: "#d4b97a",
               fontFamily: "'Pathway Extreme', sans-serif",
@@ -163,22 +163,31 @@ export function Services() {
           >
             {active.title}
           </DialogTitle>
-          <p className="text-sm text-white/80 italic" style={{ fontFamily: "'Pathway Extreme', sans-serif" }}>
+          <p
+            className="text-sm md:text-base text-white/80 italic"
+            style={{ fontFamily: "'Pathway Extreme', sans-serif" }}
+          >
             {active.subtitle}
           </p>
         </div>
       </div>
 
       {/* Conteúdo */}
-      <p className="text-sm leading-relaxed text-white/85 mb-5 mt-4">
+      <p className="text-sm md:text-base leading-relaxed text-white/85 mb-5 mt-4"
+      style={{
+        fontSize: "20px"
+      }}>
         {active.intro}
       </p>
       <ul className="space-y-3 text-left w-full">
         {active.bullets.map((b, idx) => (
           <li
             key={idx}
-            className="text-sm leading-relaxed text-white/85 flex"
-            style={{ fontFamily: "'Pathway Extreme', sans-serif" }}
+            className="text-sm md:text-base leading-relaxed text-white/85 flex"
+            style={{ 
+              fontFamily: "'Pathway Extreme', sans-serif",
+              fontSize: "20px",
+          }}
           >
             <span className="mr-2" style={{ color: "#d4b97a" }}>•</span>
             <span>
