@@ -21,37 +21,31 @@ type Service = {
   alt: string;
   title: string;
   subtitle: string;
-  intro: string;
+  intro: string | React.ReactNode;
   bullets: Bullet[];
 };
 
-const loremBullets: Bullet[] = [
-  { lead: "Lorem ipsum:", text: "dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
-  { lead: "Ut enim:", text: "ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." },
-  { lead: "Duis aute:", text: "irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur." },
-  { lead: "Excepteur sint:", text: "occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." },
-];
 
 const services: Service[] = [
   {
     img: incapacidadeImg,
     icon: iconIncapacidade,
     alt: "Incapacidade",
-    title: "INCAPACIDADE",
-    subtitle: "(Auxílio & Benefícios)",
+    title: "BENEFÍCIOS POR INCAPACIDADE",
+    subtitle: "(Auxílio-Doença e Aposentadoria por Invalidez)",
     intro:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Atuamos com dedicação para garantir seus direitos em casos de incapacidade:",
-    bullets: loremBullets,
+      "Se um problema de saúde ou acidente impede você de trabalhar, o seu foco deve ser a sua recuperação, e não a burocracia do INSS. Nosso escritório atua de forma ágil para reverter negativas injustas. Avaliamos seus laudos e exames de forma individualizada para buscar a concessão do seu benefício, seja de forma temporária ou definitiva, garantindo a sua tranquilidade financeira.",
+    bullets:[],
   },
   {
     img: pensaoImg,
     icon: iconPensao,
     alt: "Pensão",
-    title: "PENSÃO",
-    subtitle: "(Por Morte)",
+    title: "PENSÃO POR MORTE",
+    subtitle: "",
     intro:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auxiliamos famílias na conquista da pensão por morte:",
-    bullets: loremBullets,
+      "Sabemos que a perda de um familiar é um momento de dor e fragilidade. Nosso papel é acolher você e sua família com total respeito e empatia, assumindo a burocracia para garantir a proteção financeira dos dependentes. Analisamos a documentação com máxima agilidade para que a pensão seja concedida de forma rápida, no valor correto e sem dores de cabeça.",
+    bullets: [],
   },
   {
     img: aposentadoriaImg,
@@ -72,21 +66,29 @@ const services: Service[] = [
     img: acidenteImg,
     icon: iconAcidente,
     alt: "Acidente",
-    title: "ACIDENTE",
-    subtitle: "(Trabalho & Trânsito)",
-    intro:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Defendemos seus direitos em casos de acidente:",
-    bullets: loremBullets,
+    title: "AUXÍLIO-ACIDENTE",
+    subtitle: "",
+    intro: (
+  <>
+    Um dos direitos mais desconhecidos pelos trabalhadores. Se você sofreu um
+    acidente de qualquer natureza (no trabalho, no trânsito, em casa ou no
+    esporte) e ficou com alguma sequela permanente que diminuiu sua capacidade
+    para o trabalho, você pode ter direito a uma indenização mensal do INSS O melhor de tudo? Você
+    recebe esse valor e {" "}<strong>pode continuar trabalhando com carteira assinada</strong>. até
+    se aposentar. Nós avaliamos a sua sequela e lutamos por essa compensação.
+  </>
+  ),
+    bullets: [],
   },
   {
     img: revisaoImg,
     icon: iconRevisao,
     alt: "Revisão",
-    title: "REVISÃO",
-    subtitle: "(De Benefícios)",
+    title: "REVISÃO DE APOSENTADORIA",
+    subtitle: "",
     intro:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Revisamos benefícios para garantir o valor justo:",
-    bullets: loremBullets,
+      "O INSS comete erros com frequência: deixa de contar tempos de trabalho, não reconhece períodos especiais ou calcula o valor da aposentadoria a menor. Se você já é aposentado e desconfia que o valor está baixo, nossa equipe realiza um cálculo minucioso de toda a sua vida contributiva. Buscamos a correção do seu benefício na Justiça e o pagamento de todos os valores atrasados que o INSS deixou de pagar nos últimos anos.",
+    bullets: [],
   },
   {
     img: bpcImg,
@@ -95,8 +97,12 @@ const services: Service[] = [
     title: "BPC / LOAS",
     subtitle: "(Benefício Assistencial)",
     intro:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auxiliamos na conquista do BPC/LOAS:",
-    bullets: loremBullets,
+      (
+    <>
+      Um benefício fundamental que garante um salário mínimo mensal para idosos acima de 65 anos ou pessoas com deficiência de qualquer idade que vivam em situação de vulnerabilidade (baixa renda). {" "}<strong>Não é necessário ter pago o INSS</strong> para ter direito. Nossa equipe orienta sobre a atualização do CadÚnico e acompanha todo o processo para garantir que a assistência chegue a quem realmente precisa.
+    </>
+  ),
+    bullets: [],
   },
 ];
 
@@ -105,17 +111,7 @@ export function Services() {
   const active = openIndex !== null ? services[openIndex] : null;
 
   return (
-    <section
-      id="servicos"
-      className="py-24"
-      style={{
-        background: "#A68D68",
-        backgroundImage: `url(${unionBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-  }}
->
+    <section id="servicos" className="py-24 services-bg">
       <div className="container mx-auto px-6">
         <h2 className="mb-12" style={{
           fontFamily:"'Pathway Extreme', sans-serif",
@@ -158,10 +154,16 @@ export function Services() {
           className="w-12 h-12 object-contain shrink-0"
         />
         <div className="text-left">
-          <DialogTitle className="text-2xl font-bold text-gold tracking-wide">
+          <DialogTitle
+            className="text-2xl font-bold tracking-wide"
+            style={{
+              color: "#d4b97a",
+              fontFamily: "'Pathway Extreme', sans-serif",
+            }}
+          >
             {active.title}
           </DialogTitle>
-          <p className="text-sm text-white/80 italic">
+          <p className="text-sm text-white/80 italic" style={{ fontFamily: "'Pathway Extreme', sans-serif" }}>
             {active.subtitle}
           </p>
         </div>
@@ -173,10 +175,14 @@ export function Services() {
       </p>
       <ul className="space-y-3 text-left w-full">
         {active.bullets.map((b, idx) => (
-          <li key={idx} className="text-sm leading-relaxed text-white/85 flex">
-            <span className="text-gold mr-2">•</span>
+          <li
+            key={idx}
+            className="text-sm leading-relaxed text-white/85 flex"
+            style={{ fontFamily: "'Pathway Extreme', sans-serif" }}
+          >
+            <span className="mr-2" style={{ color: "#d4b97a" }}>•</span>
             <span>
-              <span className="font-bold text-gold">{b.lead}</span>{" "}
+              <span className="font-bold" style={{ color: "#d4b97a" }}>{b.lead}</span>{" "}
               {b.text}
             </span>
           </li>

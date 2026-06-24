@@ -23,9 +23,9 @@ export function Footer() {
       }}
     >
       <div className="absolute top-0 left-0 right-0 h-px bg-[#b8a572]/40" />
-      <div className="container mx-auto px-6 h-full flex items-center justify-between relative">
-        <a href="#inicio" className="flex items-center ml-10" aria-label="Luiz Ely Advocacia">
-          <img src={logo} alt="Luiz Ely Advocacia" className="h-20 w-auto" />
+      <div className="container mx-auto mt-6 px-8 py-4 flex flex-wrap items-center justify-between gap-3 relative">
+        <a href="#inicio" className="flex items-center " aria-label="Luiz Ely Advocacia">
+          <img src={logo} alt="Luiz Ely Advocacia" className="h-14 lg:h-20 w-auto object-contain" />
         </a>
 
         <nav className="hidden lg:flex items-center gap-10">
@@ -43,17 +43,14 @@ export function Footer() {
 
         <a
           href="#contato"
-          className="inline-flex items-center justify-center mr-15 hover:opacity-90 transition"
+          className="inline-flex items-center mr-12 justify-center px-2 py-3 rounded-md hover:opacity-90 transition shrink-0 whitespace-nowrap"
           style={{
-            width: "215.13px",
-            height: "44.909px",
-            borderRadius: "7.243px",
             background:"#EDE1D0",
             color: "#1D1B1B",
             fontFamily: "'Pathway Extreme', sans-serif",
             fontSize: "20.282px",
             fontStyle: "normal",
-            fontWeight: 500,
+            fontWeight: 400,
             lineHeight: "130.969%",
             letterSpacing: "0.02em",
           }}
