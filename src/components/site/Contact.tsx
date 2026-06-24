@@ -1,20 +1,82 @@
 import { useState } from "react";
-import { Mail, Phone, MapPin } from "lucide-react";
 import contactImg from "@/assets/contact-lawyer.jpg";
 import { toast } from "sonner";
 
 export function Contact() {
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
-      toast.error("Preencha todos os campos obrigatórios.");
+    if (!form.name || !form.email || !form.subject) {
+      toast.error("Preencha Nome, E-mail e Motivo do contato.");
       return;
     }
-    const body = `Nome: ${form.name}%0AEmail: ${form.email}%0ATelefone: ${form.phone}%0A%0A${form.message}`;
-    window.location.href = `mailto:contato@luizely.adv.br?subject=Contato pelo site&body=${body}`;
+
+    const body = [
+      `Nome: ${form.name}`,
+      `Telefone: ${form.phone || "não informado"}`,
+      `E-mail: ${form.email}`,
+      ``,
+      `Mensagem:`,
+      form.message || "(sem mensagem adicional)",
+    ]
+      .join("%0A")
+      .replace(/ /g, "%20");
+
+    const subject = encodeURIComponent(form.subject);
+
+    window.location.href = `mailto:contato@luizely.adv.br?subject=${subject}&body=${body}`;
     toast.success("Abrindo seu cliente de e-mail...");
   };
+
+  // Wrapper que simula border-image com gradiente via pseudo-elemento (não suportado em inline)
+  // Solução: usar outline + box-shadow ou wrapper div com padding + gradiente de fundo
+  const GoldBorderInput = ({
+    value,
+    onChange,
+    placeholder,
+    type = "text",
+  }: {
+    value: string;
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    placeholder: string;
+    type?: string;
+  }) => (
+    <div
+      style={{
+        background:
+          "linear-gradient(0deg, #FDDEB4, #FDDEB4), linear-gradient(91.13deg, #494646 2.83%, #C2A781 38.46%, #A68D68 55.48%, #FDDEB4 66.32%, #CAB190 81.13%, #443C30 100.06%)",
+        padding: "2.22px",
+        borderRadius: "4px",
+      }}
+    >
+      <input
+        value={value}
+        onChange={onChange}
+        type={type}
+        placeholder={placeholder}
+        style={{
+          width: "100%",
+          background: "rgba(87, 67, 37, 0.36)",
+          border: "none",
+          borderRadius: "2px",
+          padding: "8px 12px",
+          color: "#fff",
+          fontSize: "14px",
+          fontFamily: "'Pathway Extreme', sans-serif",
+          outline: "none",
+          boxSizing: "border-box",
+        }}
+        className="placeholder:text-white/50"
+      />
+    </div>
+  );
   return (
     <section
       id="contato"
@@ -103,42 +165,120 @@ export function Contact() {
             </div>
           </div>
 
-          <form onSubmit={onSubmit} className="bg-card border border-gold/20 rounded-2xl p-8 space-y-4">
-            <h3 className="text-xl font-semibold text-foreground">Envie um e-mail</h3>
-            <input
-              value={form.name}
-              onChange={(e) => setForm({ ...form, name: e.target.value })}
-              placeholder="Nome completo"
-              className="w-full bg-input border border-border rounded-md px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-gold outline-none"
-              
-            />
-            <input
-              value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              type="email"
-              placeholder="Seu melhor e-mail"
-              className="w-full bg-input border border-border rounded-md px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-gold outline-none"
-            />
-            <input
-              value={form.phone}
-              onChange={(e) => setForm({ ...form, phone: e.target.value })}
-              placeholder="Telefone / WhatsApp"
-              className="w-full bg-input border border-border rounded-md px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-gold outline-none"
-            />
-            <textarea
-              value={form.message}
-              onChange={(e) => setForm({ ...form, message: e.target.value })}
-              placeholder="Conte brevemente o seu caso"
-              rows={5}
-              className="w-full bg-input border border-border rounded-md px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-gold outline-none"
-            />
-            <button
-              type="submit"
-              className="w-full py-3 rounded-md gradient-gold text-primary-foreground font-semibold shadow-gold hover:opacity-90 transition"
+          {/* ── Right column: form (sem borda nem fundo) ── */}
+          <div className="p-8">
+            <h3
+              className="text-white font-semibold mb-1"
+              style={{
+                fontFamily: "'Pathway Extreme', sans-serif",
+                fontSize: "26px",
+              }}
             >
-              Enviar mensagem
-            </button>
-          </form>
+              Envie um E-mail:
+            </h3>
+            <p
+              className="text-white/60 mb-6 text-sm"
+              style={{ fontFamily: "'Pathway Extreme', sans-serif" }}
+            >
+              Escreva sua mensagem abaixo, com dados para contato.
+              <br />
+              Será enviado um E-mail automaticamente para o escritório.
+            </p>
+
+            <form onSubmit={onSubmit}>
+              <div className="flex gap-4">
+                {/* Left: stacked inputs com borda gradiente + fundo marrom */}
+                <div className="flex flex-col gap-3 flex-1">
+                  <GoldBorderInput
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    placeholder="Nome"
+                  />
+                  <GoldBorderInput
+                    value={form.phone}
+                    onChange={(e) =>
+                      setForm({ ...form, phone: e.target.value })
+                    }
+                    placeholder="Telefone"
+                  />
+                  <GoldBorderInput
+                    value={form.email}
+                    onChange={(e) =>
+                      setForm({ ...form, email: e.target.value })
+                    }
+                    type="email"
+                    placeholder="E-mail"
+                  />
+                  <GoldBorderInput
+                    value={form.subject}
+                    onChange={(e) =>
+                      setForm({ ...form, subject: e.target.value })
+                    }
+                    placeholder="Motivo do contato"
+                  />
+                </div>
+
+                {/* Right: textarea com fundo branco */}
+                <div
+                  style={{
+                    background:
+                      "linear-gradient(0deg, #FDDEB4, #FDDEB4), linear-gradient(91.13deg, #494646 2.83%, #C2A781 38.46%, #A68D68 55.48%, #FDDEB4 66.32%, #CAB190 81.13%, #443C30 100.06%)",
+                    padding: "2.22px",
+                    borderRadius: "4px",
+                    flex: 1,
+                    display: "flex",
+                  }}
+                >
+                  <textarea
+                    value={form.message}
+                    onChange={(e) =>
+                      setForm({ ...form, message: e.target.value })
+                    }
+                    placeholder="Escreva aqui sua mensagem.."
+                    style={{
+                      width: "100%",
+                      background: "#ffffff",
+                      border: "none",
+                      borderRadius: "2px",
+                      padding: "10px 12px",
+                      color: "#333",
+                      fontSize: "14px",
+                      fontFamily: "'Pathway Extreme', sans-serif",
+                      outline: "none",
+                      resize: "none",
+                      minHeight: "152px",
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Botão ENVIAR */}
+              <div className="flex justify-end mt-4">
+                <button
+                  type="submit"
+                  style={{
+                    fontFamily: "'Pathway Extreme', sans-serif",
+                    fontSize: "16px",
+                    fontWeight: 600,
+                    background: "rgba(147, 206, 241, 1)",
+                    color: "#000",
+                    letterSpacing: "2px",
+                    padding: "8px 40px",
+                    borderRadius: "4px",
+                    border: "none",
+                    cursor: "pointer",
+                    transition: "opacity 0.2s",
+                  }}
+                  onMouseOver={(e) =>
+                    (e.currentTarget.style.opacity = "0.85")
+                  }
+                  onMouseOut={(e) => (e.currentTarget.style.opacity = "1")}
+                >
+                  ENVIAR
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </section>
