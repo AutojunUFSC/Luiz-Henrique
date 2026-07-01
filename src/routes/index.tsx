@@ -45,10 +45,11 @@ function Index() {
         {/* Wrapper com imagem decorativa compartilhada entre FAQ e Contato */}
         <div className="relative overflow-hidden" style={{ backgroundColor: "rgba(166, 141, 104, 1)" }}>
           <div
-            className="absolute right-0 top-0 h-full w-[180px] pointer-events-none z-0 opacity-40 lg:opacity-100"
+            className="absolute right-0 top-0 w-[180px] pointer-events-none z-0 opacity-40 lg:opacity-100"
             style={{
+              height: "200%",
               backgroundImage: `url(${unionBg})`,
-              backgroundSize: "cover",
+              backgroundSize: "auto 100%",
               backgroundPosition: "left center",
               backgroundRepeat: "no-repeat",
             }}
