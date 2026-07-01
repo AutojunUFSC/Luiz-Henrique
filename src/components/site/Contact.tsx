@@ -1,48 +1,53 @@
+"use client";
+
 import { useState } from "react";
+// Certifique-se de que o caminho da imagem está correto no seu projeto
 import contactImg from "@/assets/Foto_Secao_contato.jpeg";
 import { toast } from "sonner";
 
+// 1. O INPUT CONTINUA FORA DA FUNÇÃO PRINCIPAL
 const GoldBorderInput = ({
-    value,
-    onChange,
-    placeholder,
-    type = "text",
-  }: {
-    value: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    placeholder: string;
-    type?: string;
-  }) => (
-    <div
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+}: {
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  type?: string;
+}) => (
+  <div
+    style={{
+      background:
+        "linear-gradient(91.13deg, #494646 2.83%, #C2A781 38.46%, #A68D68 55.48%, #FDDEB4 66.32%, #CAB190 81.13%, #443C30 100.06%)",
+      padding: "2.22px",
+      borderRadius: "7px",
+      width: "100%",
+      maxWidth: "202.885px",
+    }}
+  >
+    <input
+      value={value}
+      onChange={onChange}
+      type={type}
+      placeholder={placeholder}
       style={{
-        background:
-          "linear-gradient(91.13deg, #494646 2.83%, #C2A781 38.46%, #A68D68 55.48%, #FDDEB4 66.32%, #CAB190 81.13%, #443C30 100.06%)",
-        padding: "2.22px",
-        borderRadius: "7px",
-        width: "202.885px",
+        width: "100%",
+        background: "rgba(131, 115, 84, 1)",
+        border: "none",
+        borderRadius: "5px",
+        padding: "8px 12px",
+        color: "#fff",
+        fontSize: "14px",
+        fontFamily: "'Pathway Extreme', sans-serif",
+        outline: "none",
+        boxSizing: "border-box",
       }}
-    >
-      <input
-        value={value}
-        onChange={onChange}
-        type={type}
-        placeholder={placeholder}
-        style={{
-          width: "100%",
-          background: "rgba(131, 115, 84, 1)",
-          border: "none",
-          borderRadius: "5px",
-          padding: "8px 12px",
-          color: "#fff",
-          fontSize: "14px",
-          fontFamily: "'Pathway Extreme', sans-serif",
-          outline: "none",
-          boxSizing: "border-box",
-        }}
-        className="placeholder:text-white/50"
-      />
-    </div>
-  );
+      className="placeholder:text-white/50"
+    />
+  </div>
+);
 
 export function Contact() {
   const [form, setForm] = useState({
@@ -53,28 +58,67 @@ export function Contact() {
     message: "",
   });
 
-  const onSubmit = (e: React.FormEvent) => {
+  // 2. NOVO ESTADO: Para controlar se o formulário está carregando
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // 3. FUNÇÃO DE ENVIO ATUALIZADA (agora é async)
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.subject) {
       toast.error("Preencha Nome, E-mail e Motivo do contato.");
       return;
     }
 
-    const body = [
-      `Nome: ${form.name}`,
-      `Telefone: ${form.phone || "não informado"}`,
-      `E-mail: ${form.email}`,
-      ``,
-      `Mensagem:`,
-      form.message || "(sem mensagem adicional)",
-    ]
-      .join("%0A")
-      .replace(/ /g, "%20");
+    setIsSubmitting(true);
+    // Cria um ID para o toast para podermos atualizá-lo depois
+    const toastId = toast.loading("Enviando sua mensagem..."); 
 
-    const subject = encodeURIComponent(form.subject);
+    try {
+      // ⚠️ ATENÇÃO: COLOQUE A SUA URL DO FORMSPREE AQUI ABAIXO
+      const FORMSPREE_URL = "https://formspree.io/f/mykqnvna";
 
-    window.location.href = `mailto:contato@luizely.adv.br?subject=${subject}&body=${body}`;
-    toast.success("Abrindo seu cliente de e-mail...");
+      const response = await fetch(FORMSPREE_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        // Mapeando os dados do formulário para o Formspree
+        body: JSON.stringify({
+          Nome: form.name,
+          Telefone: form.phone || "Não informado",
+          Email: form.email,
+          Assunto: form.subject,
+          Mensagem: form.message || "Sem mensagem adicional",
+        }),
+      });
+
+      if (response.ok) {
+        // Deu tudo certo!
+        toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.", {
+          id: toastId, // Atualiza o toast de "carregando"
+        });
+        
+        // Limpa os campos após o envio
+        setForm({
+          name: "",
+          phone: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        // Erro do lado do servidor (ex: bloqueio de spam)
+        toast.error("Ocorreu um erro ao enviar. Tente novamente mais tarde.", {
+          id: toastId,
+        });
+      }
+    } catch (error) {
+      // Erro de conexão (ex: usuário sem internet)
+      toast.error("Erro de conexão. Verifique sua internet.", { id: toastId });
+    } finally {
+      setIsSubmitting(false); // Libera o botão novamente
+    }
   };
 
   return (
@@ -110,9 +154,7 @@ export function Contact() {
 
         <div className="grid lg:grid-cols-2 gap-15 items-start">
           {/* Coluna esquerda: foto + dados */}
-          {/* ADICIONADO: flex-col para mobile, lg:flex-row para desktop */}
           <div className="flex flex-col lg:flex-row gap-6 items-center lg:items-start">
-            {/* ADICIONADO: max-w para evitar que a imagem estoure a tela no mobile */}
             <div className="rounded-2xl overflow-hidden w-full max-w-[329px] h-[403px] shrink-0">
               <img
                 src={contactImg}
@@ -123,7 +165,6 @@ export function Contact() {
                 className="w-full h-full object-cover"
               />
             </div>
-            {/* ADICIONADO: mt-6 lg:mt-52 para corrigir o espaçamento no mobile */}
             <div className="flex flex-col gap-4 mt-6 lg:mt-52 items-center lg:items-start text-center lg:text-left">
               <div
                 className="text-sm text-white space-y-1"
@@ -136,8 +177,8 @@ export function Contact() {
                 }}
               >
                 <p className="font-bold">DR. LUIZ ELY HENRIQUE</p>
-                <p>Telefone: (49) 9116-0683</p>
-                <p>Facebook: Luizhenriqueadvocacia</p>
+                <p>Telefone: (49) 99116-0683</p>
+                <p>E-mail: email@gmail.com</p>
                 <p>Instagram: @luizelyadvocacia</p>
               </div>
               <div
@@ -149,7 +190,7 @@ export function Contact() {
                 }}
               >
                 <a
-                  href="https://wa.me/5504991160683"
+                  href="https://wa.me/55049991160683"
                   target="_blank"
                   rel="noreferrer"
                   className="flex items-center justify-center px-3 py-2 rounded-[5px] font-semibold transition"
@@ -193,9 +234,7 @@ export function Contact() {
             </p>
 
             <form onSubmit={onSubmit}>
-              {/* ADICIONADO: flex-col para empilhar os campos no mobile */}
               <div className="flex flex-col lg:flex-row gap-4 ml-0 lg:ml-[5px] mr-0 lg:mr-[20px]">
-                {/* Inputs empilhados */}
                 <div className="flex flex-col gap-3 w-full lg:w-auto items-center lg:items-start">
                   <GoldBorderInput
                     value={form.name}
@@ -226,7 +265,6 @@ export function Contact() {
                   />
                 </div>
 
-                {/* Espaço de texto */}
                 <div
                   style={{
                     background:
@@ -261,7 +299,7 @@ export function Contact() {
                 </div>
               </div>
 
-              {/* Botão ENVIAR */}
+              {/* 4. BOTÃO COM ESTADO DE LOADING */}
               <div className="flex justify-center lg:justify-end mt-6 mr-0 lg:mr-[20px]">
                 <div
                   style={{
@@ -273,6 +311,7 @@ export function Contact() {
                 >
                   <button
                     type="submit"
+                    disabled={isSubmitting} // Desativa o botão se estiver enviando
                     style={{
                       fontFamily: "'Pathway Extreme', sans-serif",
                       fontSize: "16px",
@@ -283,15 +322,18 @@ export function Contact() {
                       padding: "5px 25px",
                       borderRadius: "5px",
                       border: "none",
-                      cursor: "pointer",
+                      cursor: isSubmitting ? "not-allowed" : "pointer",
                       transition: "opacity 0.2s",
+                      opacity: isSubmitting ? 0.7 : 1, // Fica mais opaco ao enviar
                     }}
-                    onMouseOver={(e) =>
-                      (e.currentTarget.style.opacity = "0.85")
-                    }
-                    onMouseOut={(e) => (e.currentTarget.style.opacity = "1")}
+                    onMouseOver={(e) => {
+                      if (!isSubmitting) e.currentTarget.style.opacity = "0.85";
+                    }}
+                    onMouseOut={(e) => {
+                      if (!isSubmitting) e.currentTarget.style.opacity = "1";
+                    }}
                   >
-                    ENVIAR
+                    {isSubmitting ? "ENVIANDO..." : "ENVIAR"}
                   </button>
                 </div>
               </div>
