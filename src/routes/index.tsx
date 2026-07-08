@@ -43,16 +43,19 @@ function Index() {
         <Social />
 
         {/* Wrapper com imagem decorativa compartilhada entre FAQ e Contato */}
-        <div className="relative overflow-hidden" style={{ backgroundColor: "rgba(166, 141, 104, 1)" }}>
+        {/* 1. REMOVIDO o overflow-hidden */}
+        <div className="relative" style={{ backgroundColor: "rgba(166, 141, 104, 1)" }}>
           <div
-            className="absolute right-0 top-0 h-full w-[180px] pointer-events-none z-0 opacity-40 lg:opacity-100"
+            // 2. ADICIONADO -top-24 (sobe mais a imagem) e ajustado para z-0
+            className="absolute right-0 -top-32 bottom-0 w-[180px] pointer-events-none z-10 opacity-40 lg:opacity-100"
             style={{
               backgroundImage: `url(${unionBg})`,
-              backgroundSize: "cover",
-              backgroundPosition: "left center",
+              backgroundPosition: "left top", 
+              backgroundSize: "100% auto", 
               backgroundRepeat: "no-repeat",
             }}
           />
+          {/* 3. AUMENTADO z-index do conteúdo para garantir que os textos fiquem por cima da imagem */}
           <div className="relative z-10">
             <FAQ />
             <Contact />
