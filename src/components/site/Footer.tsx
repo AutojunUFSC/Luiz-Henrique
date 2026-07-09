@@ -42,7 +42,7 @@ export function Footer() {
         </nav>
 
         <a
-          href="#contato"
+          href="https://wa.me/5549991160683"
           className="inline-flex items-center mr-12 justify-center px-2 py-3 rounded-md hover:opacity-90 transition shrink-0 whitespace-nowrap"
           style={{
             background:"#EDE1D0",

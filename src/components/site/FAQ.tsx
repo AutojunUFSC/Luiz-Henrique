@@ -13,6 +13,7 @@ const faqs = [
 
 export function FAQ() {
   const [open, setOpen] = useState<number | null>(null);
+  const [hovered, setHovered] = useState<number | null>(null);
 
   return (
     <section
@@ -61,11 +62,17 @@ export function FAQ() {
                 key={i}
                 type="button"
                 onClick={() => setOpen(isOpen ? null : i)}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
                 aria-expanded={isOpen}
-                className="self-start bg-card border ml-4 border-gold/20 rounded-xl px-2 py-2 text-center transition-colors hover:border-gold/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
-              style={{
-                backgroundColor: "rgba(24, 24, 24, 1)",
-              }}>
+                className="self-start border ml-4 rounded-xl px-2 py-2 text-center focus:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+                style={{
+                  backgroundColor: "rgba(24, 24, 24, 1)",
+                  border: hovered === i ? "1px solid rgba(212, 185, 122, 1)" : "1px solid rgba(212, 185, 122, 0.2)",
+                  transform: hovered === i ? "scale(1.1)" : "scale(1)",
+                  transition: "all 0.2s ease",
+                }}
+              >
                 <span
                   className="block transition-all"
                   style={{

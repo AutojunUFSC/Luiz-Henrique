@@ -43,7 +43,7 @@ export function Header() {
         </nav>
 
         <a
-          href="#contato"
+          href="https://wa.me/5549991160683"
           className="hidden lg:inline-flex items-center mr-12 justify-center hover:opacity-90 transition"
           style={{
             width: "201.13px",
@@ -90,7 +90,7 @@ export function Header() {
               </a>
             ))}
             <a
-              href="#contato"
+              href="https://wa.me/5549991160683"
               onClick={() => setOpen(false)}
               className="inline-flex items-center justify-center px-6 py-3 rounded-md bg-[#0f1726] text-white text-[13px] font-semibold"
             >
