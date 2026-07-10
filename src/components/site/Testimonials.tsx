@@ -1,3 +1,4 @@
+import { useState, useRef } from "react";
 import { Gavel } from "lucide-react";
 
 const items = [
@@ -39,13 +40,98 @@ const items = [
 ];
 
 export function Testimonials() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    startX.current = e.pageX - scrollRef.current.offsetLeft;
+    scrollLeft.current = scrollRef.current.scrollLeft;
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5; 
+    scrollRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
   return (
     <section id="depoimentos" className="pt-24 pb-0 relative z-20 overflow-visible">
       
-      {/* Metade superior da seção em Bege */}
+      <style>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          height: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 9999px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(166, 141, 104, 0.55);
+          border-radius: 9999px;
+          cursor: pointer;
+          border: 2px solid transparent;
+          background-clip: padding-box;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(166, 141, 104, 0.85);
+          border: 2px solid transparent;
+          background-clip: padding-box;
+        }
+        .custom-scrollbar {
+          scrollbar-width: auto;
+          scrollbar-color: rgba(166, 141, 104, 0.55) rgba(255, 255, 255, 0.05);
+        }
+
+        .custom-scrollbar::before,
+        .custom-scrollbar::after {
+          content: "";
+          display: block;
+          flex-shrink: 0;
+          width: 1.5rem;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+          margin-left: 1.5rem;
+          margin-right: 1.5rem;
+        }
+
+        @media (min-width: 640px) {
+          .custom-scrollbar::before, .custom-scrollbar::after { width: calc((100vw - 640px) / 2 + 1.5rem); }
+          .custom-scrollbar::-webkit-scrollbar-track { margin-left: calc((100vw - 640px) / 2 + 1.5rem); margin-right: calc((100vw - 640px) / 2 + 1.5rem); }
+        }
+        @media (min-width: 768px) {
+          .custom-scrollbar::before, .custom-scrollbar::after { width: calc((100vw - 768px) / 2 + 1.5rem); }
+          .custom-scrollbar::-webkit-scrollbar-track { margin-left: calc((100vw - 768px) / 2 + 1.5rem); margin-right: calc((100vw - 768px) / 2 + 1.5rem); }
+        }
+        @media (min-width: 1024px) {
+          .custom-scrollbar::before, .custom-scrollbar::after { width: calc((100vw - 1024px) / 2 + 1.5rem); }
+          .custom-scrollbar::-webkit-scrollbar-track { margin-left: calc((100vw - 1024px) / 2 + 1.5rem); margin-right: calc((100vw - 1024px) / 2 + 1.5rem); }
+        }
+        @media (min-width: 1280px) {
+          .custom-scrollbar::before, .custom-scrollbar::after { width: calc((100vw - 1280px) / 2 + 1.5rem); }
+          .custom-scrollbar::-webkit-scrollbar-track { margin-left: calc((100vw - 1280px) / 2 + 1.5rem); margin-right: calc((100vw - 1280px) / 2 + 1.5rem); }
+        }
+        @media (min-width: 1536px) {
+          .custom-scrollbar::before, .custom-scrollbar::after { width: calc((100vw - 1536px) / 2 + 1.5rem); }
+          .custom-scrollbar::-webkit-scrollbar-track { margin-left: calc((100vw - 1536px) / 2 + 1.5rem); margin-right: calc((100vw - 1536px) / 2 + 1.5rem); }
+        }
+      `}</style>
+
       <div className="absolute inset-x-0 top-0 bottom-[180px] bg-[#A68D68] -z-10" />
-      
-      {/* Rodapé da seção casado perfeitamente com a cor da seção Social (#181818) */}
       <div className="absolute inset-x-0 bottom-0 h-[180px] bg-[#181818] -z-10" />
 
       <div className="container mx-auto px-6 mb-12 relative z-10">
@@ -58,19 +144,22 @@ export function Testimonials() {
       </div>
 
       <div className="relative z-10">
-        {/* AJUSTE AQUI: Mudado px-6 para px-12 nas telas menores, e recalculado o preenchimento para telas grandes (md) */}
         <div
-          className="flex gap-6 overflow-x-auto pt-16 pb-16 px-12 md:pl-[max(3rem,calc((100vw-1280px)/2+3rem))] md:pr-[max(3rem,calc((100vw-1280px)/2+3rem))] snap-x snap-mandatory cursor-grab active:cursor-grabbing scrollbar-hide"
-          style={{ scrollbarWidth: "none" }}
+          ref={scrollRef}
+          onMouseDown={handleMouseDown}
+          onMouseLeave={handleMouseLeave}
+          onMouseUp={handleMouseUp}
+          onMouseMove={handleMouseMove}
+          className={`flex gap-6 overflow-x-auto pt-16 pb-20 custom-scrollbar transition-all
+            ${isDragging ? "snap-none select-none cursor-grabbing" : "snap-x snap-mandatory cursor-grab"}`}
         >
           {items.map((t) => (
             <article
               key={t.name}
               className="snap-start shrink-0 w-[78vw] sm:w-[42vw] md:w-[28vw] lg:w-[calc((100%-1.5rem*3)/3.5)] min-w-[260px] max-w-[360px] aspect-[5/6] relative overflow-visible"
             >
-              {/* Martelo flutuante com efeito 3D */}
               <Gavel 
-                className="absolute -top-10 -right-4 w-20 h-20 text-[#e2e8f0] drop-shadow-[-12px_12px_20px_rgba(0,0,0,0.6)] -rotate-12 z-30 transition-transform duration-300 hover:scale-110" 
+                className="absolute -top-10 -right-4 w-20 h-20 text-[#e2e8f0] drop-shadow-[-12px_12px_20px_rgba(0,0,0,0.6)] -rotate-12 z-30 transition-transform duration-300 hover:scale-110 pointer-events-none" 
                 strokeWidth={1.2} 
               />
               
@@ -100,8 +189,6 @@ export function Testimonials() {
               </div>
             </article>
           ))}
-          {/* AJUSTE AQUI: Aumentado de w-6 para w-12 para dar mais espaço de respiro no final da rolagem */}
-          <div className="shrink-0 w-12" aria-hidden />
         </div>
       </div>
     </section>

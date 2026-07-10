@@ -44,10 +44,9 @@ function Index() {
 
         {/* Wrapper com imagem decorativa compartilhada entre FAQ e Contato */}
         {/* 1. REMOVIDO o overflow-hidden */}
-        <div className="relative" style={{ backgroundColor: "rgba(166, 141, 104, 1)" }}>
+        <div className="relative z-10" style={{ backgroundColor: "rgba(166, 141, 104, 1)" }}>
           <div
-            // 2. ADICIONADO -top-24 (sobe mais a imagem) e ajustado para z-0
-            className="absolute right-0 -top-32 bottom-0 w-[180px] pointer-events-none z-10 opacity-40 lg:opacity-100"
+            className="absolute right-0 -top-32 bottom-0 w-[180px] pointer-events-none z-0 opacity-40 lg:opacity-100"
             style={{
               backgroundImage: `url(${unionBg})`,
               backgroundPosition: "left top", 

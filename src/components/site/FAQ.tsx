@@ -18,7 +18,7 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="py-24 overflow-hidden"
+      className="relative py-24 overflow-hidden"
 >
   <div className="absolute inset-0 pattern-deco opacity-0" />
   
@@ -33,6 +33,7 @@ export function FAQ() {
       opacity: 1,
     }}
   /> */}
+  
   <div
     className="hidden lg:block absolute -left-90 -top-30 bottom-0 w-[1058px] h-[1042px] pointer-events-none"
     style={{
