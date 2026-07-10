@@ -1,31 +1,31 @@
-import s1 from "@/assets/social1.jpg";
-import s2 from "@/assets/social2.jpg";
-import s3 from "@/assets/social3.jpg";
+import s1 from "@/assets/social1.png";
+import s2 from "@/assets/social2.png";
+import s3 from "@/assets/social3.png";
 
 export function Social() {
   const posts = [
     {
       img: s1,
-      title: "Título",
-      text: "Minha história na advocacia começou 15 anos atrás, quando eu...",
-      href: "https://instagram.com",
+      title: "Como funciona o BPC/LOAS",
+      text: "Milhares de brasileiros têm direito a esse auxílio, mas acabam perdendo por falta de informação.O BPC/LOAS garante um salário ...",
+      href: "https://www.instagram.com/luizelyadvocacia",
     },
     {
       img: s2,
-      title: "Título",
-      text: "Por que eu escolhi o direito previdenciário. Eu sempre...",
-      href: "https://instagram.com",
+      title: "Benefícios por Incapacidade",
+      text: "Quando um problema de saúde ou acidente afasta você do trabalho, a última coisa que você precisa é lutar contra o sistema. Atuamos ...",
+      href: "https://www.instagram.com/luizelyadvocacia",
     },
     {
       img: s3,
-      title: "Título",
-      text: "Cada caso que eu trabalho tem um valor para mim. Significa...",
-      href: "https://instagram.com",
+      title: "Auxílio-Acidente",
+      text: "Um dos direitos mais desconhecidos pelos trabalhadores é o Auxílio-Acidente. Se você sofreu um acidente ...",
+      href: "https://www.instagram.com/luizelyadvocacia",
     },
   ];
 
   return (
-    <section id="redes-sociais" className="relative py-24 z-10 overflow-hidden">
+    <section id="redes-sociais" className="relative py-24 z-20 overflow-hidden">
       
       {/* Fundo escuro estendido para 68% da altura, englobando os textos perfeitamente */}
       <div className="absolute top-0 left-0 right-0 h-[68%] bg-[#181818] -z-10" />
@@ -78,9 +78,27 @@ export function Social() {
               />
             </svg>
 
-            <div className="relative z-10">Instagram: @usuario</div>
-            <div className="relative z-10">LinkedIn: usuario</div>
-            <div className="relative z-10">Facebook: usuario</div>
+            <div className="relative z-10">
+              <a 
+                href="https://instagram.com/luizelyadvocacia" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:underline hover:opacity-80 transition-opacity"
+              >
+                Instagram: @luizelyadvocacia
+              </a>
+            </div>
+
+            <div className="relative z-10">
+              <a 
+                href="https://www.facebook.com/p/Luiz-Henrique-Advocacia-61567160681872/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:underline hover:opacity-80 transition-opacity"
+              >
+                Facebook: Luiz Henrique Advocacia
+              </a>
+            </div>
           </div>
         </div>
 
